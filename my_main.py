@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+# https://www.thepythoncode.com/article/using-speech-recognition-to-convert-speech-to-text-python
 import speech_recognition as sr
 import os, sys
 from pydub import AudioSegment
@@ -11,11 +12,13 @@ except:
 	filename = "sample.wav"
 r = sr.Recognizer()
 
-def transcript(filename):
+def transcript(filename=""):
     """
     Splitting the large audio file into chunks
     and apply speech recognition on each of these chunks
     """
+    if not filename:
+        return
     # open the audio file using pydub
     sound = AudioSegment.from_wav(path)  
     # split audio sound where silence is 700 miliseconds or more and get chunks
@@ -53,8 +56,26 @@ def transcript(filename):
     # return the text for all chunks detected
     return whole_text
 
+
+# https://stackoverflow.com/questions/27473526/download-only-audio-from-youtube-video-using-youtube-dl-in-python-script
+from __future__ import unicode_literals
+import youtube_dl
+ydl_opts = {
+    'format': 'bestaudio',
+    'postprocessors': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'mp3',
+        'preferredquality': '192',
+    }],
+}
+
+def download_video(link=""):
+    if not link:
+        return
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([link])
+
+
 if __name__ == '__main__':
-    text = transcript(filename)
-    # translator = Translator()
-    print(text, file=open('audio.txt', 'w'))
-    # text = translator.translate(text, src='hi').text
+    # text = transcript(filename)
+    # print(text, file=open('audio.txt', 'w'))
