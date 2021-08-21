@@ -8,3 +8,4 @@ Werkzeug==0.15.6
 youtube-dl==2020.12.26
 SpeechRecognition
 pydub
+selenium
