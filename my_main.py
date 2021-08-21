@@ -11,6 +11,7 @@ from my_translator import hindiToEnglish
 audioname = "voice.wav"
 r = sr.Recognizer()
 
+
 def transcript(audioname=audioname):
     """
     Splitting the large audio file into chunks
@@ -19,7 +20,7 @@ def transcript(audioname=audioname):
     if not audioname:
         return
     # open the audio file using pydub
-    print('started')
+    print('started to transcript')
     sound = AudioSegment.from_file(audioname)
     # split audio sound where silence is 700 miliseconds or more and get chunks
     chunks = split_on_silence(sound,
@@ -53,9 +54,7 @@ def transcript(audioname=audioname):
                 text = f"{text.capitalize()}. "
                 print(chunk_filename, ":", text)
                 whole_text += text
-    # return the text for all chunks detected
-    with open('text.txt', 'w') as f:
-        f.write(whole_text)
+    # print(whole_text, file=open=open('text.txt', 'w'))
     os.system("rm -rf voice.* audio-chunks")
     return whole_text
 
@@ -83,9 +82,15 @@ def download_video(link=""):
     # os.system('youtube-dl -f "bestaudio[ext=m4a]" '+link)
     return True
 
+def findFilename():
+    for file in os.listdir("./"):
+        if file.startswith("voice"):
+            return file
+    return ''
 
 def videoToEnglish(link=''):
     download_video(link)
+    audioname = findFilename()
     whole_text = transcript(audioname)
     whole_text = hindiToEnglish(whole_text)
 

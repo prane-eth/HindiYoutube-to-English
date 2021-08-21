@@ -1,9 +1,13 @@
 import time
 from selenium import webdriver
 
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument("--headless")  
+
+
 def getHindiText(english_text=''):
     hindi_text = ''
-    with webdriver.Chrome('./chromedriver') as driver:
+    with webdriver.Chrome('./chromedriver', chrome_options=chrome_options) as driver:
         driver.get('https://www.easyhindityping.com/english-to-hindi-translation')
         driver.find_element_by_id('SourceTextarea').clear()
         driver.find_element_by_id('SourceTextarea').send_keys(english_text)
@@ -18,7 +22,7 @@ def getHindiText(english_text=''):
 
 def googleTranslate(hindi_text = ''):
     english_text = ''
-    with webdriver.Chrome('./chromedriver') as driver:
+    with webdriver.Chrome('./chromedriver', chrome_options=chrome_options) as driver:
         driver.get("https://translate.google.co.in/?sl=auto&tl=en&text="+hindi_text+"&op=translate")
         time.sleep(10)
         english_text = driver.find_element_by_xpath(
