@@ -54,7 +54,7 @@ def home():
     return render_template_string(var.html_code, msg=msg, txt=txt)
 
 
-@app.route('/')
+@app.route('/output/')
 def output():
     output1 = ''
     with open('last_translated.txt') as file:
