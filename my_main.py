@@ -1,26 +1,25 @@
 #!/usr/bin/env python3
 
 # https://www.thepythoncode.com/article/using-speech-recognition-to-convert-speech-to-text-python
+from __future__ import unicode_literals
 import speech_recognition as sr
 import os, sys
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 
-try:
-	filename = sys.argv[1]
-except:
-	filename = "sample.wav"
+audioname = "voice.wav"
 r = sr.Recognizer()
 
-def transcript(filename=""):
+def transcript(audioname=audioname):
     """
     Splitting the large audio file into chunks
     and apply speech recognition on each of these chunks
     """
-    if not filename:
+    if not audioname:
         return
     # open the audio file using pydub
-    sound = AudioSegment.from_wav(path)  
+    print('started')
+    sound = AudioSegment.from_file(audioname)
     # split audio sound where silence is 700 miliseconds or more and get chunks
     chunks = split_on_silence(sound,
         # experiment with this value for your target audio file
@@ -54,28 +53,38 @@ def transcript(filename=""):
                 print(chunk_filename, ":", text)
                 whole_text += text
     # return the text for all chunks detected
+    with open('text.txt', 'w') as f:
+        f.write(whole_text)
+    os.system("rm -rf voice.* audio-chunks")
     return whole_text
 
 
 # https://stackoverflow.com/questions/27473526/download-only-audio-from-youtube-video-using-youtube-dl-in-python-script
-from __future__ import unicode_literals
+# from __future__ import unicode_literals  # written at first
 import youtube_dl
 ydl_opts = {
     'format': 'bestaudio',
     'postprocessors': [{
         'key': 'FFmpegExtractAudio',
-        'preferredcodec': 'mp3',
-        'preferredquality': '192',
+        'preferredcodec': 'm4a',
     }],
+    'outtmpl': audioname,
 }
 
 def download_video(link=""):
     if not link:
-        return
+        return False
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download([link])
+    # link = link.lstrip.('https://www.youtube.com/watch?v=')
+    # if len(link) != 11:
+        # return False
+    # os.system('youtube-dl -f "bestaudio[ext=m4a]" '+link)
+    return True
 
 
 if __name__ == '__main__':
+    download_video('https://www.youtube.com/watch?v=Ss42AX9h_Mw')
+    print('')
     # text = transcript(filename)
     # print(text, file=open('audio.txt', 'w'))
