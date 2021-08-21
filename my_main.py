@@ -6,6 +6,7 @@ import speech_recognition as sr
 import os, sys
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
+from my_translator import hindiToEnglish
 
 audioname = "voice.wav"
 r = sr.Recognizer()
@@ -83,8 +84,11 @@ def download_video(link=""):
     return True
 
 
+def videoToEnglish(link=''):
+    download_video(link)
+    whole_text = transcript(audioname)
+    whole_text = hindiToEnglish(whole_text)
+
+
 if __name__ == '__main__':
-    download_video('https://www.youtube.com/watch?v=Ss42AX9h_Mw')
-    print('')
-    # text = transcript(filename)
-    # print(text, file=open('audio.txt', 'w'))
+    videoToEnglish('https://www.youtube.com/watch?v=Ss42AX9h_Mw')
