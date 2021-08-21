@@ -33,11 +33,8 @@ class var:
 
 # https://stackoverflow.com/questions/59850517/how-to-run-background-tasks-in-python
 class BackgroundTasks(threading.Thread):
-    link = ''
-    def __init__(self, link: str):
-        self.link = link
     def run(self, *args, **kwargs):
-        os.system('python3 my_main.py ' + self.link)
+        os.system('python3 my_main.py ' + var.link)
 
 
 @app.route('/', methods = ['POST', 'GET'])
@@ -48,7 +45,7 @@ def home():
         link = request.form['link']
         msg = 'Link added to queue'
         var.link = link
-        t = BackgroundTasks(link)
+        t = BackgroundTasks()
         t.start()
     #
     with open('last_translated.txt') as file:

@@ -99,7 +99,8 @@ def videoToEnglish(link=''):
     audioname = findFilename()
     whole_text = transcript(audioname)
     whole_text = hindiToEnglish(whole_text)
-    print(whole_text, file=open('last_translated.txt', 'w'))
+    print(link + '\n' + whole_text,
+            file=open('last_translated.txt', 'w'))
     return whole_text
 
 
