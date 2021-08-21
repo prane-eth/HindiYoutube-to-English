@@ -12,7 +12,12 @@ def getHindiText(english_text=''):
         driver.get('https://www.easyhindityping.com/english-to-hindi-translation')
         driver.find_element_by_id('SourceTextarea').clear()
         driver.find_element_by_id('SourceTextarea').send_keys(english_text)
-        driver.find_element_by_id('SubmitTranslation').click()
+        while 1:
+            try:
+                driver.find_element_by_id('SubmitTranslation').click()
+                break
+            except:
+                pass
         #
         time.sleep(10)
         hindi_text = driver.find_element_by_id('TargetTextarea').get_property("value")
