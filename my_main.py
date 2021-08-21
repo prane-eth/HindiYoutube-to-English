@@ -11,6 +11,11 @@ from my_translator import hindiToEnglish
 audioname = "voice.wav"
 r = sr.Recognizer()
 
+try:
+    link = sys.argv[1]
+except:
+    link = ''
+
 
 def transcript(audioname=audioname):
     """
@@ -82,6 +87,7 @@ def download_video(link=""):
     # os.system('youtube-dl -f "bestaudio[ext=m4a]" '+link)
     return True
 
+
 def findFilename():
     for file in os.listdir("./"):
         if file.startswith("voice"):
@@ -96,4 +102,4 @@ def videoToEnglish(link=''):
 
 
 if __name__ == '__main__':
-    videoToEnglish('https://www.youtube.com/watch?v=Ss42AX9h_Mw')
+    videoToEnglish(link)

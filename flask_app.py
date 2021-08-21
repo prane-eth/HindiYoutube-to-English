@@ -1,13 +1,15 @@
 ' Web app which detects Brute force attacks '
 
-import re
+import os, threading, time
 from flask import *
 from my_main import transcript, download_video
 
 app = Flask(__name__)
 app.secret_key = 'my_secret_key_123'
 
+
 class var:
+    link = ''
     html_code = '''
         <title> Youtube to English </title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -27,12 +29,20 @@ class var:
     '''
 
 
+class BackgroundTasks(threading.Thread):
+    def run(self, *args, **kwargs):
+        os.system('python3 my_main.py ' + var.link)
+
+
 @app.route('/', methods = ['POST', 'GET'])
 def home():
     msg = ''
     if request.method == 'POST':
         link = request.form['link']
         msg = 'Link added to queue'
+        var.link = link
+        t = BackgroundTasks()
+        t.start()
     else:
         msg = ''
     return render_template_string(var.html_code, msg=msg)
