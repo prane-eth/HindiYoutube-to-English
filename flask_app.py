@@ -37,7 +37,7 @@ class BackgroundTasks(threading.Thread):
     def __init__(self, link: str):
         self.link = link
     def run(self, *args, **kwargs):
-        os.system('python3 my_main.py ' + link)
+        os.system('python3 my_main.py ' + self.link)
 
 
 @app.route('/', methods = ['POST', 'GET'])
