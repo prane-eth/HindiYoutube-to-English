@@ -59,7 +59,6 @@ def transcript(audioname=audioname):
                 text = f"{text.capitalize()}. "
                 print(chunk_filename, ":", text)
                 whole_text += text
-    # print(whole_text, file=open=open('text.txt', 'w'))
     os.system("rm -rf voice.* audio-chunks")
     return whole_text
 
@@ -94,11 +93,14 @@ def findFilename():
             return file
     return ''
 
+
 def videoToEnglish(link=''):
     download_video(link)
     audioname = findFilename()
     whole_text = transcript(audioname)
     whole_text = hindiToEnglish(whole_text)
+    print(whole_text, file=open('last_translated.txt', 'w'))
+    return whole_text
 
 
 if __name__ == '__main__':

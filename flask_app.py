@@ -26,26 +26,35 @@ class var:
                 <div class="msg"> {{ msg }} </div> 
             </h2> 
         </div>
+        Last translated: <br>
+        {{ txt }}
     '''
 
 
+# https://stackoverflow.com/questions/59850517/how-to-run-background-tasks-in-python
 class BackgroundTasks(threading.Thread):
+    link = ''
+    def __init__(self, link: str):
+        self.link = link
     def run(self, *args, **kwargs):
-        os.system('python3 my_main.py ' + var.link)
+        os.system('python3 my_main.py ' + link)
 
 
 @app.route('/', methods = ['POST', 'GET'])
 def home():
     msg = ''
+    txt = '-'
     if request.method == 'POST':
         link = request.form['link']
         msg = 'Link added to queue'
         var.link = link
-        t = BackgroundTasks()
+        t = BackgroundTasks(link)
         t.start()
-    else:
-        msg = ''
-    return render_template_string(var.html_code, msg=msg)
+    #
+    with open('last_translated.txt') as file:
+        txt = file.read()
+    return render_template_string(var.html_code, msg=msg, txt=txt)
+
 
 if __name__ == "__main__":
     app.run(port=8080)
