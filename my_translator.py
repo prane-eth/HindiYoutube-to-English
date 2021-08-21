@@ -1,8 +1,9 @@
-import time
+import time, sys
 from selenium import webdriver
 
 chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument("--headless")  
+chrome_options.add_argument("--headless") 
+sys.stdout = open('output.txt', 'a') 
 
 
 def getHindiText(english_text=''):

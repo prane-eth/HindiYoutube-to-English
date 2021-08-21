@@ -1,11 +1,12 @@
 ' Web app which detects Brute force attacks '
 
-import os, threading, time
+import os, threading, time, sys
 from flask import *
 from my_main import transcript, download_video
 
 app = Flask(__name__)
 app.secret_key = 'my_secret_key_123'
+sys.stdout = open('output.txt', 'a')
 
 
 class var:
@@ -51,6 +52,14 @@ def home():
     with open('last_translated.txt') as file:
         txt = file.read()
     return render_template_string(var.html_code, msg=msg, txt=txt)
+
+
+@app.route('/')
+def output():
+    output1 = ''
+    with open('last_translated.txt') as file:
+        output1 = file.read()
+    return output1
 
 
 if __name__ == "__main__":

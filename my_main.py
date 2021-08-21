@@ -15,6 +15,7 @@ try:
     link = sys.argv[1]
 except:
     link = ''
+sys.stdout = open('output.txt', 'a')
 
 
 def transcript(audioname=audioname):
