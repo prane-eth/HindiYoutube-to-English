@@ -31,6 +31,7 @@ class var:
         <a href='./last_translated/'> Click here </a> <br>
         <a href='./output/'> Code output </a> <br>
         <a href='https://translate.google.com/?sl=hi&tl=en'> Google Translator </a> <br>
+        <a href='http://koobo.ml/reader/?i=1'> Reader </a> <br>
     '''
 
 
