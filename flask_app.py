@@ -2,7 +2,7 @@
 
 import os, threading, time, sys
 from flask import *
-from my_main import transcript, download_video
+# from my_main import transcript, download_video
 
 app = Flask(__name__)
 app.secret_key = 'my_secret_key_123'
@@ -53,7 +53,7 @@ def home():
 
 
 @app.route('/last_translated/')
-def output():
+def last_translated():
     output1 = ''
     with open('last_translated.txt') as file:
         output1 = file.read()
