@@ -59,6 +59,7 @@ def last_translated():
     output1 = ''
     with open(filename) as file:
         output1 = file.read()
+    output1 = output1.replace('\n', '<br>')
     return render_template_string(output1)
 
 
@@ -68,6 +69,7 @@ def output():
     output1 = ''
     with open(filename) as file:
         output1 = file.read()
+    output1 = output1.replace('\n', '<br>')
     return render_template_string(output1)
 
 
