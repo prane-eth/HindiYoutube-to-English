@@ -54,18 +54,20 @@ def home():
 
 @app.route('/last_translated/')
 def last_translated():
+    filename = 'last_translated.txt'
     output1 = ''
-    with open('last_translated.txt') as file:
+    with open(filename) as file:
         output1 = file.read()
-    return output1
+    return render_template_string(output1)
 
 
 @app.route('/output/')
 def output():
+    filename = 'output.txt'
     output1 = ''
-    with open('output.txt') as file:
+    with open(filename) as file:
         output1 = file.read()
-    return output1
+    return render_template_string(output1)
 
 
 if __name__ == "__main__":
