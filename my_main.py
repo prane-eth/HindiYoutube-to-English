@@ -96,12 +96,12 @@ def findFilename():
 
 
 def videoToEnglish(link=''):
-    print(link + '\n', file=open('last_translated.txt', 'w'))
+    print(link + '\n  \n', file=open('last_translated.txt', 'w'))
     download_video(link)
     audioname = findFilename()
     whole_text = transcript(audioname)
     whole_text = hindiToEnglish(whole_text)
-    print(whole_text, file=open('last_translated.txt', 'w'))
+    print(whole_text, file=open('last_translated.txt', 'a'))
     return whole_text
 
 

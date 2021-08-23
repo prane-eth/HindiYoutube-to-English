@@ -57,7 +57,7 @@ def home():
 @app.route('/output/')
 def output():
     output1 = ''
-    with open('last_translated.txt') as file:
+    with open('output.txt') as file:
         output1 = file.read()
     return output1
 

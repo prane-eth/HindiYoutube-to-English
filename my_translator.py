@@ -41,7 +41,10 @@ def googleTranslate(hindi_text = ''):
 
 def hindiToEnglish(english_text=''):
     # english_text = 'Tu aaja bhi insan hai vah bhi kuchh 4 5 10 15 20 ko gadi kar payenge 121 ab 1200 kar payenge to aapko dimag lagana hai aapko kab jana hai to bahut sahi hai mujhe. Aur.'
+    print('\n Getting Hindi text')
     hindi_text = getHindiText(english_text)
+    print('Translating')
     english_text = googleTranslate(hindi_text)
+    print('Translated')
     return english_text
 
