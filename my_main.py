@@ -54,12 +54,11 @@ def transcript(audioname=audioname):
             # try converting it to text
             try:
                 text = r.recognize_google(audio_listened, language='hi-In')
-            except sr.UnknownValueError as e:
-                print("Error:", str(e))
-            else:
                 text = f"{text.capitalize()}. "
                 print(chunk_filename, ":", text)
                 whole_text += text
+            except sr.UnknownValueError as e:
+                print("Error:", str(e))
     os.system("rm -rf voice.* audio-chunks")
     return whole_text
 
