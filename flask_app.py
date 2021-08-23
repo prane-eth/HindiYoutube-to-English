@@ -36,7 +36,7 @@ class var:
 
 
 # https://stackoverflow.com/questions/59850517/how-to-run-background-tasks-in-python
-class BackgroundTasks(threading.Thread):
+class BackgroundTask(threading.Thread):
     def run(self, *args, **kwargs):
         os.system('python3 my_main.py ' + var.link)
 
@@ -49,7 +49,7 @@ def home():
         link = request.form['link']
         msg = 'Link added to queue'
         var.link = link
-        t = BackgroundTasks()
+        t = BackgroundTask()
         t.start()
     #
     return render_template_string(var.html_code, msg=msg)
