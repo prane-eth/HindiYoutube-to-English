@@ -29,6 +29,7 @@ class var:
         </div>
         Last translated: 
         <a href='./last_translated/'> Click here </a> <br>
+        <a href='./output/'> Code output </a> <br>
     '''
 
 
