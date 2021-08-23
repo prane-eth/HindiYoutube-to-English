@@ -27,8 +27,8 @@ class var:
                 <div class="msg"> {{ msg }} </div> 
             </h2> 
         </div>
-        Last translated: <br>
-        <a href='./last_translated'> Click here </a> <br>
+        Last translated: 
+        <a href='./last_translated/'> Click here </a> <br>
     '''
 
 

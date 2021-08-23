@@ -97,7 +97,7 @@ def findFilename():
 
 
 def videoToEnglish(link=''):
-    print(link + '\n  \n', file=open('last_translated.txt', 'w'))
+    print(link + '\n <br> <br>  \n', file=open('last_translated.txt', 'w'))
     download_video(link)
     audioname = findFilename()
     whole_text = transcript(audioname)
