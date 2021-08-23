@@ -28,7 +28,7 @@ class var:
             </h2> 
         </div>
         Last translated: <br>
-        {{ txt }}
+        <a href='./last_translated'> Click here </a> <br>
     '''
 
 
@@ -49,9 +49,15 @@ def home():
         t = BackgroundTasks()
         t.start()
     #
+    return render_template_string(var.html_code, msg=msg)
+
+
+@app.route('/last_translated/')
+def output():
+    output1 = ''
     with open('last_translated.txt') as file:
-        txt = file.read()
-    return render_template_string(var.html_code, msg=msg, txt=txt)
+        output1 = file.read()
+    return output1
 
 
 @app.route('/output/')

@@ -53,7 +53,7 @@ def transcript(audioname=audioname):
             audio_listened = r.record(source)
             # try converting it to text
             try:
-                text = r.recognize_google(audio_listened)
+                text = r.recognize_google(audio_listened, language='hi-In')
             except sr.UnknownValueError as e:
                 print("Error:", str(e))
             else:
@@ -71,7 +71,8 @@ ydl_opts = {
     'format': 'bestaudio',
     'postprocessors': [{
         'key': 'FFmpegExtractAudio',
-        'preferredcodec': 'm4a',
+        'preferredcodec': 'wav',
+	    'preferredquality': '192',
     }],
     'outtmpl': audioname,
 }
@@ -100,7 +101,7 @@ def videoToEnglish(link=''):
     download_video(link)
     audioname = findFilename()
     whole_text = transcript(audioname)
-    whole_text = hindiToEnglish(whole_text)
+    # whole_text = hindiToEnglish(whole_text)
     print(whole_text, file=open('last_translated.txt', 'a'))
     return whole_text
 
